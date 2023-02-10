@@ -1,0 +1,33 @@
+{
+    "name": "twilightjs-telegram-bot-api",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/twilightjs/telegram-bot-api"
+    },
+    "author": "SeRzZzJ",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/twilightjs/telegram-bot-api/issues"
+    },
+    "homepage": "https://github.com/twilightjs/telegram-bot-api#readme",
+    "engines": {
+        "node": ">=18"
+    },
+    "keywords": [
+        "telegram",
+        "telegram bot api",
+        "bot",
+        "botapi",
+        "bot framework",
+        "twilightjs",
+        "twilight.js",
+        "twilight.js-telegram-bot-api",
+        "twilightjs-telegram-bot-api"
+    ]
+}
