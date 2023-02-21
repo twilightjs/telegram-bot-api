@@ -1,4 +1,4 @@
-export type Update = {
+export interface UpdateScheme {
     update_id?: number;
     message?: Message;
     edited_message?: Message;
@@ -14,8 +14,11 @@ export type Update = {
     my_chat_member?: ChatMemberUpdated;
     chat_member?: ChatMemberUpdated;
     chat_join_request?: ChatJoinRequest;
-};
-export type User = {
+}
+export interface Update {
+    update_id?: number;
+}
+export interface User {
     id?: string | number;
     is_bot?: boolean;
     first_name?: string;
@@ -27,8 +30,8 @@ export type User = {
     can_join_groups?: boolean;
     can_read_all_group_messages?: boolean;
     supports_inline_queries?: boolean;
-};
-export type Chat = {
+}
+export interface Chat {
     id?: string | number;
     type?: "private" | "group" | "supergroup" | "channel";
     title?: string;
@@ -57,8 +60,8 @@ export type Chat = {
     can_set_sticker_set?: boolean;
     linked_chat_id?: number;
     location?: ChatLocation;
-};
-export type Message = {
+}
+export interface Message extends Update {
     message_id?: string | number;
     message_thread_id?: string | number;
     from?: User;
@@ -130,11 +133,11 @@ export type Message = {
     video_chat_participants_invited?: VideoChatParticipantsInvited;
     web_app_data?: WebAppData;
     reply_markup?: InlineKeyboardMarkup;
-};
-export type MessageId = {
+}
+export interface MessageId {
     message_id?: string | number;
-};
-export type MessageEntity = {
+}
+export interface MessageEntity {
     type?:
         | "mention"
         | "hashtag"
@@ -159,15 +162,15 @@ export type MessageEntity = {
     user?: User;
     language?: string;
     custom_emoji_id?: string;
-};
-export type PhotoSize = {
+}
+export interface PhotoSize {
     file_id?: string;
     file_unique_id?: string;
     width?: number;
     height?: number;
     file_size?: number;
-};
-export type Animation = {
+}
+export interface Animation {
     file_id?: string;
     file_unique_id?: string;
     width?: number;
@@ -177,8 +180,8 @@ export type Animation = {
     file_name?: string;
     mime_type?: string;
     file_size?: number;
-};
-export type Audio = {
+}
+export interface Audio {
     file_id?: string;
     file_unique_id?: string;
     duration?: number;
@@ -188,16 +191,16 @@ export type Audio = {
     mime_type?: string;
     file_size?: number;
     thumb?: PhotoSize;
-};
-export type Document = {
+}
+export interface Document {
     file_id?: string;
     file_unique_id?: string;
     thumb?: PhotoSize;
     file_name?: string;
     mime_type?: string;
     file_size?: number;
-};
-export type Video = {
+}
+export interface Video {
     file_id?: string;
     file_unique_id?: string;
     width?: number;
@@ -207,43 +210,43 @@ export type Video = {
     file_name?: string;
     mime_type?: string;
     file_size?: number;
-};
-export type VideoNote = {
+}
+export interface VideoNote {
     file_id?: string;
     file_unique_id?: string;
     length?: number;
     duration?: number;
     thumb?: PhotoSize;
     file_size?: number;
-};
-export type Voice = {
+}
+export interface Voice {
     file_id?: string;
     file_unique_id?: string;
     duration?: number;
     mime_type?: string;
     file_size?: number;
-};
-export type Contact = {
+}
+export interface Contact {
     phone_number?: string;
     first_name?: string;
     last_name?: string;
     user_id?: number;
     vcard?: string;
-};
-export type Dice = {
+}
+export interface Dice {
     emoji?: string;
     value?: number;
-};
-export type PollOption = {
+}
+export interface PollOption {
     text?: string;
     voter_count?: number;
-};
-export type PollAnswer = {
+}
+export interface PollAnswer extends Update {
     poll_id?: string;
     user?: User;
     option_ids?: number[];
-};
-export type Poll = {
+}
+export interface Poll extends Update {
     id?: string;
     question?: string;
     options?: PollOption[];
@@ -257,16 +260,16 @@ export type Poll = {
     explanation_entities?: MessageEntity[];
     open_period?: number;
     close_date?: number;
-};
-export type Location = {
+}
+export interface Location {
     longitude?: number;
     latitude?: number;
     horizontal_accuracy?: number;
     live_period?: number;
     heading?: number;
     proximity_alert_radius?: number;
-};
-export type Venue = {
+}
+export interface Venue {
     location?: Location;
     title?: string;
     address?: string;
@@ -274,73 +277,73 @@ export type Venue = {
     foursquare_type?: string;
     google_place_id?: string;
     google_place_type?: string;
-};
-export type WebAppData = {
+}
+export interface WebAppData {
     data?: string;
     button_text?: string;
-};
-export type ProximityAlertTriggered = {
+}
+export interface ProximityAlertTriggered {
     traveler?: User;
     watcher?: User;
     distance?: number;
-};
-export type MessageAutoDeleteTimerChanged = {
+}
+export interface MessageAutoDeleteTimerChanged {
     message_auto_delete_time?: number;
-};
-export type ForumTopicCreated = {
+}
+export interface ForumTopicCreated {
     name?: string;
     icon_color?: number;
     icon_custom_emoji_id?: string;
-};
-export type ForumTopicClosed = {};
-export type ForumTopicEdited = {
+}
+export interface ForumTopicClosed {}
+export interface ForumTopicEdited {
     name?: string;
     icon_custom_emoji_id?: string;
-};
-export type ForumTopicReopened = {};
-export type GeneralForumTopicHidden = {};
-export type GeneralForumTopicUnhidden = {};
-export type UserShared = {
+}
+export interface ForumTopicReopened {}
+export interface GeneralForumTopicHidden {}
+export interface GeneralForumTopicUnhidden {}
+export interface UserShared {
     request_id?: number;
     user_id?: number;
-};
-export type ChatShared = {
+}
+export interface ChatShared {
     request_id?: number;
     chat_id?: number;
-};
-export type WriteAccessAllowed = {};
-export type VideoChatScheduled = {
+}
+export interface WriteAccessAllowed {}
+export interface VideoChatScheduled {
     start_date?: number;
-};
-export type VideoChatStarted = {};
-export type VideoChatEnded = {
+}
+export interface VideoChatStarted {}
+export interface VideoChatEnded {
     duration?: number;
-};
-export type VideoChatParticipantsInvited = {
+}
+export interface VideoChatParticipantsInvited {
     users?: User[];
-};
-export type UserProfilePhotos = {
+}
+export interface UserProfilePhotos {
     total_count?: number;
     photos?: PhotoSize[][];
-};
-export type File = {
+}
+export interface File {
     file_id?: string;
     file_unique_id?: string;
     file_size?: number;
     file_path?: string;
-};
-export type WebAppInfo = {
+}
+export interface WebAppInfo {
     url?: string;
-};
-export type ReplyKeyboardMarkup = {
+}
+export interface ReplyKeyboardMarkup {
     keyboard?: KeyboardButton[][];
     is_persistent?: boolean;
     resize_keyboard?: boolean;
     one_time_keyboard?: boolean;
     input_field_placeholder?: string;
     selective?: boolean;
-};
-export type KeyboardButton = {
+}
+export interface KeyboardButton {
     text?: string;
     request_user?: KeyboardButtonRequestUser;
     request_chat?: KeyboardButtonRequestChat;
@@ -348,13 +351,13 @@ export type KeyboardButton = {
     request_location?: boolean;
     request_poll?: KeyboardButtonPollType;
     web_app?: WebAppInfo;
-};
-export type KeyboardButtonRequestUser = {
+}
+export interface KeyboardButtonRequestUser {
     request_id?: number;
     user_is_bot?: boolean;
     user_is_premium?: boolean;
-};
-export type KeyboardButtonRequestChat = {
+}
+export interface KeyboardButtonRequestChat {
     request_id?: number;
     chat_is_channel?: boolean;
     chat_is_forum?: boolean;
@@ -363,18 +366,18 @@ export type KeyboardButtonRequestChat = {
     user_administrator_rights?: ChatAdministratorRights;
     bot_administrator_rights?: ChatAdministratorRights;
     bot_is_member?: boolean;
-};
-export type KeyboardButtonPollType = {
+}
+export interface KeyboardButtonPollType {
     type?: "regular" | "quiz";
-};
-export type ReplyKeyboardRemove = {
+}
+export interface ReplyKeyboardRemove {
     remove_keyboard?: boolean;
     selective?: boolean;
-};
-export type InlineKeyboardMarkup = {
+}
+export interface InlineKeyboardMarkup {
     inline_keyboard?: InlineKeyboardButton[][];
-};
-export type InlineKeyboardButton = {
+}
+export interface InlineKeyboardButton {
     text?: string;
     url?: string;
     callback_data?: string;
@@ -382,14 +385,14 @@ export type InlineKeyboardButton = {
     login_url?: LoginUrl;
     switch_inline_query?: string;
     pay?: boolean;
-};
-export type LoginUrl = {
+}
+export interface LoginUrl {
     url?: string;
     forward_text?: string;
     bot_username?: string;
     request_write_access?: boolean;
-};
-export type CallbackQuery = {
+}
+export interface CallbackQuery extends Update {
     id?: string;
     from?: User;
     message?: Message;
@@ -397,19 +400,19 @@ export type CallbackQuery = {
     chat_instance?: string;
     data?: string;
     game_short_name?: string;
-};
-export type ForceReply = {
+}
+export interface ForceReply {
     force_reply?: boolean;
     input_field_placeholder?: string;
     selective?: boolean;
-};
-export type ChatPhoto = {
+}
+export interface ChatPhoto {
     small_file_id?: string;
     small_file_unique_id?: string;
     big_file_id?: string;
     big_file_unique_id?: string;
-};
-export type ChatInviteLink = {
+}
+export interface ChatInviteLink {
     invite_link?: string;
     creator?: User;
     creates_join_request?: boolean;
@@ -419,8 +422,8 @@ export type ChatInviteLink = {
     expire_date?: number;
     member_limit?: number;
     pending_join_request_count?: number;
-};
-export type ChatAdministratorRights = {
+}
+export interface ChatAdministratorRights {
     is_anonymous?: boolean;
     can_manage_chat?: boolean;
     can_delete_messages?: boolean;
@@ -433,15 +436,15 @@ export type ChatAdministratorRights = {
     can_edit_messages?: boolean;
     can_pin_messages?: boolean;
     can_manage_topics?: boolean;
-};
-export type ChatMember = {};
-export type ChatMemberOwner = {
+}
+export interface ChatMember {}
+export interface ChatMemberOwner {
     status?: string;
     user?: User;
     is_anonymous?: boolean;
     custom_title?: string;
-};
-export type ChatMemberAdministrator = {
+}
+export interface ChatMemberAdministrator {
     status?: string;
     user?: User;
     can_be_edited?: boolean;
@@ -458,12 +461,12 @@ export type ChatMemberAdministrator = {
     can_pin_messages?: boolean;
     can_manage_topics?: boolean;
     custom_title?: string;
-};
-export type ChatMemberMember = {
+}
+export interface ChatMemberMember {
     status?: string;
     user?: User;
-};
-export type ChatMemberRestricted = {
+}
+export interface ChatMemberRestricted {
     status?: string;
     user?: User;
     is_member?: boolean;
@@ -482,33 +485,33 @@ export type ChatMemberRestricted = {
     can_pin_messages?: boolean;
     can_manage_topics?: boolean;
     until_date?: number;
-};
-export type ChatMemberLeft = {
+}
+export interface ChatMemberLeft {
     status?: string;
     user?: User;
-};
-export type ChatMemberBanned = {
+}
+export interface ChatMemberBanned {
     status?: string;
     user?: User;
     until_date?: number;
-};
-export type ChatMemberUpdated = {
+}
+export interface ChatMemberUpdated extends Update {
     chat?: Chat;
     from?: User;
     date?: number;
     old_chat_member?: ChatMember;
     new_chat_member?: ChatMember;
     invite_link?: ChatInviteLink;
-};
-export type ChatJoinRequest = {
+}
+export interface ChatJoinRequest extends Update {
     chat?: Chat;
     from?: User;
     user_chat_id?: number;
     date?: number;
     bio?: string;
     invite_link?: ChatInviteLink;
-};
-export type ChatPermissions = {
+}
+export interface ChatPermissions {
     can_send_messages?: boolean;
     can_send_audios?: boolean;
     can_send_documents?: boolean;
@@ -523,73 +526,73 @@ export type ChatPermissions = {
     can_invite_users?: boolean;
     can_pin_messages?: boolean;
     can_manage_topics?: boolean;
-};
-export type ChatLocation = {
+}
+export interface ChatLocation {
     location?: Location;
     address?: string;
-};
-export type ForumTopic = {
+}
+export interface ForumTopic {
     message_thread_id?: number;
     name?: string;
     icon_color?: number;
     icon_custom_emoji_id?: string;
-};
-export type BotCommand = {
+}
+export interface BotCommand {
     command?: string;
     description?: string;
-};
-export type BotCommandScope = {};
-export type BotCommandScopeDefault = {
+}
+export interface BotCommandScope {}
+export interface BotCommandScopeDefault {
     type?: string;
-};
-export type BotCommandScopeAllPrivateChats = {
+}
+export interface BotCommandScopeAllPrivateChats {
     type?: string;
-};
-export type BotCommandScopeAllGroupChats = {
+}
+export interface BotCommandScopeAllGroupChats {
     type?: string;
-};
-export type BotCommandScopeAllChatAdministrators = {
+}
+export interface BotCommandScopeAllChatAdministrators {
     type?: string;
-};
-export type BotCommandScopeChat = {
-    type?: string;
-    chat_id?: string | number;
-};
-export type BotCommandScopeChatAdministrators = {
+}
+export interface BotCommandScopeChat {
     type?: string;
     chat_id?: string | number;
-};
-export type BotCommandScopeChatMember = {
+}
+export interface BotCommandScopeChatAdministrators {
+    type?: string;
+    chat_id?: string | number;
+}
+export interface BotCommandScopeChatMember {
     type?: string;
     chat_id?: string | number;
     user_id?: number;
-};
-export type MenuButton = {};
-export type MenuButtonCommands = {
+}
+export interface MenuButton {}
+export interface MenuButtonCommands {
     type?: string;
-};
-export type MenuButtonWebApp = {
+}
+export interface MenuButtonWebApp {
     type?: string;
     text?: string;
     web_app?: WebAppInfo;
-};
-export type MenuButtonDefault = {
+}
+export interface MenuButtonDefault {
     type?: string;
-};
-export type ResponseParameters = {
+}
+export interface ResponseParameters {
     migrate_to_chat_id?: number;
     retry_after?: number;
-};
-export type InputMedia = {};
-export type InputMediaPhoto = {
+}
+export interface InputMedia {}
+export interface InputMediaPhoto {
     type?: string;
     media?: string;
     caption?: string;
     parse_mode?: string;
     caption_entities?: MessageEntity[];
     has_spoiler?: boolean;
-};
-export type InputMediaVideo = {
+}
+export interface InputMediaVideo {
     type?: string;
     media?: string;
     thumb?: InputFile | string;
@@ -601,8 +604,8 @@ export type InputMediaVideo = {
     duration?: number;
     supports_streaming?: boolean;
     has_spoiler?: boolean;
-};
-export type InputMediaAnimation = {
+}
+export interface InputMediaAnimation {
     type?: string;
     media?: string;
     thumb?: InputFile | string;
@@ -613,8 +616,8 @@ export type InputMediaAnimation = {
     height?: number;
     duration?: number;
     has_spoiler?: boolean;
-};
-export type InputMediaAudio = {
+}
+export interface InputMediaAudio {
     type?: string;
     media?: string;
     thumb?: InputFile | string;
@@ -624,8 +627,8 @@ export type InputMediaAudio = {
     duration?: number;
     performer?: string;
     title?: string;
-};
-export type InputMediaDocument = {
+}
+export interface InputMediaDocument {
     type?: string;
     media?: string;
     thumb?: InputFile | string;
@@ -633,9 +636,9 @@ export type InputMediaDocument = {
     parse_mode?: string;
     caption_entities?: MessageEntity[];
     disable_content_type_detection?: boolean;
-};
-export type InputFile = {};
-export type Sticker = {
+}
+export interface InputFile {}
+export interface Sticker {
     file_id?: string;
     file_unique_id?: string;
     type?: string;
@@ -650,8 +653,8 @@ export type Sticker = {
     mask_position?: MaskPosition;
     custom_emoji_id?: string;
     file_size?: number;
-};
-export type StickerSet = {
+}
+export interface StickerSet {
     name?: string;
     title?: string;
     sticker_type?: string;
@@ -659,22 +662,24 @@ export type StickerSet = {
     is_video?: boolean;
     stickers?: Sticker[];
     thumb?: PhotoSize;
-};
-export type MaskPosition = {
+}
+export interface MaskPosition {
     point?: string;
     x_shift?: number;
     y_shift?: number;
     scale?: number;
-};
-export type InlineQuery = {
+}
+export interface InlineQuery extends Update {
     id?: string;
     from?: User;
     query?: string;
     offset?: string;
     chat_type?: string;
     location?: Location;
-};
-export type InlineQueryResultCachedAudio = {
+}
+export interface InlineQueryResult {
+}
+export interface InlineQueryResultCachedAudio {
     type?: string;
     id?: string;
     audio_file_id?: string;
@@ -683,8 +688,8 @@ export type InlineQueryResultCachedAudio = {
     caption_entities?: MessageEntity[];
     reply_markup?: InlineKeyboardMarkup;
     input_message_content?: InputMessageContent;
-};
-export type InlineQueryResultCachedDocument = {
+}
+export interface InlineQueryResultCachedDocument {
     type?: string;
     id?: string;
     title?: string;
@@ -695,8 +700,8 @@ export type InlineQueryResultCachedDocument = {
     caption_entities?: MessageEntity[];
     reply_markup?: InlineKeyboardMarkup;
     input_message_content?: InputMessageContent;
-};
-export type InlineQueryResultCachedGif = {
+}
+export interface InlineQueryResultCachedGif {
     type?: string;
     id?: string;
     gif_file_id?: string;
@@ -706,8 +711,8 @@ export type InlineQueryResultCachedGif = {
     caption_entities?: MessageEntity[];
     reply_markup?: InlineKeyboardMarkup;
     input_message_content?: InputMessageContent;
-};
-export type InlineQueryResultCachedMpeg4Gif = {
+}
+export interface InlineQueryResultCachedMpeg4Gif {
     type?: string;
     id?: string;
     mpeg4_file_id?: string;
@@ -717,8 +722,8 @@ export type InlineQueryResultCachedMpeg4Gif = {
     caption_entities?: MessageEntity[];
     reply_markup?: InlineKeyboardMarkup;
     input_message_content?: InputMessageContent;
-};
-export type InlineQueryResultCachedPhoto = {
+}
+export interface InlineQueryResultCachedPhoto {
     type?: string;
     id?: string;
     photo_file_id?: string;
@@ -729,15 +734,15 @@ export type InlineQueryResultCachedPhoto = {
     caption_entities?: MessageEntity[];
     reply_markup?: InlineKeyboardMarkup;
     input_message_content?: InputMessageContent;
-};
-export type InlineQueryResultCachedSticker = {
+}
+export interface InlineQueryResultCachedSticker {
     type?: string;
     id?: string;
     sticker_file_id?: string;
     reply_markup?: InlineKeyboardMarkup;
     input_message_content?: InputMessageContent;
-};
-export type InlineQueryResultCachedVideo = {
+}
+export interface InlineQueryResultCachedVideo {
     type?: string;
     id?: string;
     video_file_id?: string;
@@ -748,8 +753,8 @@ export type InlineQueryResultCachedVideo = {
     caption_entities?: MessageEntity[];
     reply_markup?: InlineKeyboardMarkup;
     input_message_content?: InputMessageContent;
-};
-export type InlineQueryResultCachedVoice = {
+}
+export interface InlineQueryResultCachedVoice {
     type?: string;
     id?: string;
     voice_file_id?: string;
@@ -759,8 +764,8 @@ export type InlineQueryResultCachedVoice = {
     caption_entities?: MessageEntity[];
     reply_markup?: InlineKeyboardMarkup;
     input_message_content?: InputMessageContent;
-};
-export type InlineQueryResultArticle = {
+}
+export interface InlineQueryResultArticle {
     type?: string;
     id?: string;
     title?: string;
@@ -772,8 +777,8 @@ export type InlineQueryResultArticle = {
     thumb_url?: string;
     thumb_width?: number;
     thumb_height?: number;
-};
-export type InlineQueryResultAudio = {
+}
+export interface InlineQueryResultAudio {
     type?: string;
     id?: string;
     audio_url?: string;
@@ -785,8 +790,8 @@ export type InlineQueryResultAudio = {
     audio_duration?: number;
     reply_markup?: InlineKeyboardMarkup;
     input_message_content?: InputMessageContent;
-};
-export type InlineQueryResultContact = {
+}
+export interface InlineQueryResultContact {
     type?: string;
     id?: string;
     phone_number?: string;
@@ -798,14 +803,14 @@ export type InlineQueryResultContact = {
     thumb_url?: string;
     thumb_width?: number;
     thumb_height?: number;
-};
-export type InlineQueryResultGame = {
+}
+export interface InlineQueryResultGame {
     type?: string;
     id?: string;
     game_short_name?: string;
     reply_markup?: InlineKeyboardMarkup;
-};
-export type InlineQueryResultDocument = {
+}
+export interface InlineQueryResultDocument {
     type?: string;
     id?: string;
     title?: string;
@@ -820,8 +825,8 @@ export type InlineQueryResultDocument = {
     thumb_url?: string;
     thumb_width?: number;
     thumb_height?: number;
-};
-export type InlineQueryResultGif = {
+}
+export interface InlineQueryResultGif {
     type?: string;
     id?: string;
     gif_url?: string;
@@ -836,8 +841,8 @@ export type InlineQueryResultGif = {
     caption_entities?: MessageEntity[];
     reply_markup?: InlineKeyboardMarkup;
     input_message_content?: InputMessageContent;
-};
-export type InlineQueryResultLocation = {
+}
+export interface InlineQueryResultLocation {
     type?: string;
     id?: string;
     latitude?: number;
@@ -852,8 +857,8 @@ export type InlineQueryResultLocation = {
     thumb_url?: string;
     thumb_width?: number;
     thumb_height?: number;
-};
-export type InlineQueryResultMpeg4Gif = {
+}
+export interface InlineQueryResultMpeg4Gif {
     type?: string;
     id?: string;
     mpeg4_url?: string;
@@ -868,8 +873,8 @@ export type InlineQueryResultMpeg4Gif = {
     caption_entities?: MessageEntity[];
     reply_markup?: InlineKeyboardMarkup;
     input_message_content?: InputMessageContent;
-};
-export type InlineQueryResultPhoto = {
+}
+export interface InlineQueryResultPhoto {
     type?: string;
     id?: string;
     photo_url?: string;
@@ -883,8 +888,8 @@ export type InlineQueryResultPhoto = {
     caption_entities?: MessageEntity[];
     reply_markup?: InlineKeyboardMarkup;
     input_message_content?: InputMessageContent;
-};
-export type InlineQueryResultVenue = {
+}
+export interface InlineQueryResultVenue {
     type?: string;
     id?: string;
     latitude?: number;
@@ -900,8 +905,8 @@ export type InlineQueryResultVenue = {
     thumb_url?: string;
     thumb_width?: number;
     thumb_height?: number;
-};
-export type InlineQueryResultVideo = {
+}
+export interface InlineQueryResultVideo {
     type?: string;
     id?: string;
     video_url?: string;
@@ -917,8 +922,8 @@ export type InlineQueryResultVideo = {
     description?: string;
     reply_markup?: InlineKeyboardMarkup;
     input_message_content?: InputMessageContent;
-};
-export type InlineQueryResultVoice = {
+}
+export interface InlineQueryResultVoice {
     type?: string;
     id?: string;
     voice_url?: string;
@@ -929,22 +934,22 @@ export type InlineQueryResultVoice = {
     voice_duration?: number;
     reply_markup?: InlineKeyboardMarkup;
     input_message_content?: InputMessageContent;
-};
-export type InputTextMessageContent = {
+}
+export interface InputTextMessageContent {
     message_text?: string;
     parse_mode?: string;
     entities?: MessageEntity[];
     disable_web_page_preview?: boolean;
-};
-export type InputLocationMessageContent = {
+}
+export interface InputLocationMessageContent {
     latitude?: number;
     longitude?: number;
     horizontal_accuracy?: number;
     live_period?: number;
     heading?: number;
     proximity_alert_radius?: number;
-};
-export type InputVenueMessageContent = {
+}
+export interface InputVenueMessageContent {
     latitude?: number;
     longitude?: number;
     title?: string;
@@ -953,14 +958,14 @@ export type InputVenueMessageContent = {
     foursquare_type?: string;
     google_place_id?: string;
     google_place_type?: string;
-};
-export type InputContactMessageContent = {
+}
+export interface InputContactMessageContent {
     phone_number?: string;
     first_name?: string;
     last_name?: string;
     vcard?: string;
-};
-export type InputInvoiceMessageContent = {
+}
+export interface InputInvoiceMessageContent {
     title?: string;
     description?: string;
     payload?: string;
@@ -981,55 +986,55 @@ export type InputInvoiceMessageContent = {
     send_phone_number_to_provider?: boolean;
     send_email_to_provider?: boolean;
     is_flexible?: boolean;
-};
-export type InputMessageContent = {
+}
+export interface InputMessageContent {
     result_id?: string;
     from?: User;
     location?: Location;
     inline_message_id?: string;
     query?: string;
-};
-export type ChosenInlineResult = {
+}
+export interface ChosenInlineResult extends Update {
     result_id?: string;
     from?: User;
     location?: Location;
     inline_message_id?: string;
     query?: string;
-};
-export type SentWebAppMessage = {
+}
+export interface SentWebAppMessage {
     inline_message_id?: string;
-};
-export type LabeledPrice = {
+}
+export interface LabeledPrice {
     label?: string;
     amount?: number;
-};
-export type Invoice = {
+}
+export interface Invoice {
     title?: string;
     description?: string;
     start_parameter?: string;
     currency?: string;
     total_amount?: number;
-};
-export type ShippingAddress = {
+}
+export interface ShippingAddress {
     country_code?: string;
     state?: string;
     city?: string;
     street_line1?: string;
     street_line2?: string;
     post_code?: string;
-};
-export type OrderInfo = {
+}
+export interface OrderInfo {
     name?: string;
     phone_number?: string;
     email?: string;
     shipping_address?: ShippingAddress;
-};
-export type ShippingOption = {
+}
+export interface ShippingOption {
     id?: string;
     title?: string;
     prices?: LabeledPrice[];
-};
-export type SuccessfulPayment = {
+}
+export interface SuccessfulPayment {
     currency?: string;
     total_amount?: number;
     invoice_payload?: string;
@@ -1037,14 +1042,14 @@ export type SuccessfulPayment = {
     order_info?: OrderInfo;
     telegram_payment_charge_id?: string;
     provider_payment_charge_id?: string;
-};
-export type ShippingQuery = {
+}
+export interface ShippingQuery extends Update {
     id?: string;
     from?: User;
     invoice_payload?: string;
     shipping_address?: ShippingAddress;
-};
-export type PreCheckoutQuery = {
+}
+export interface PreCheckoutQuery extends Update {
     id?: string;
     from?: User;
     currency?: string;
@@ -1052,18 +1057,18 @@ export type PreCheckoutQuery = {
     invoice_payload?: string;
     shipping_option_id?: string;
     order_info?: OrderInfo;
-};
-export type PassportData = {
+}
+export interface PassportData {
     data?: EncryptedPassportElement[];
     credentials?: EncryptedCredentials;
-};
-export type PassportFile = {
+}
+export interface PassportFile {
     file_id?: string;
     file_unique_id?: string;
     file_size?: number;
     file_date?: number;
-};
-export type EncryptedPassportElement = {
+}
+export interface EncryptedPassportElement {
     type?: string;
     data?: string;
     phone_number?: string;
@@ -1074,79 +1079,79 @@ export type EncryptedPassportElement = {
     selfie?: PassportFile;
     translation?: PassportFile[];
     hash?: string;
-};
-export type EncryptedCredentials = {
+}
+export interface EncryptedCredentials {
     data?: string;
     hash?: string;
     secret?: string;
-};
-export type PassportElementError = {};
-export type PassportElementErrorDataField = {
+}
+export interface PassportElementError {}
+export interface PassportElementErrorDataField {
     source?: string;
     type?: string;
     field_name?: string;
     data_hash?: string;
     message?: string;
-};
-export type PassportElementErrorFrontSide = {
+}
+export interface PassportElementErrorFrontSide {
     source?: string;
     type?: string;
     file_hash?: string;
     message?: string;
-};
-export type PassportElementErrorReverseSide = {
+}
+export interface PassportElementErrorReverseSide {
     source?: string;
     type?: string;
     file_hash?: string;
     message?: string;
-};
-export type PassportElementErrorSelfie = {
+}
+export interface PassportElementErrorSelfie {
     source?: string;
     type?: string;
     file_hash?: string;
     message?: string;
-};
-export type PassportElementErrorFile = {
+}
+export interface PassportElementErrorFile {
     source?: string;
     type?: string;
     file_hash?: string;
     message?: string;
-};
-export type PassportElementErrorFiles = {
+}
+export interface PassportElementErrorFiles {
     source?: string;
     type?: string;
     file_hashes?: string[];
     message?: string;
-};
-export type PassportElementErrorTranslationFile = {
+}
+export interface PassportElementErrorTranslationFile {
     source?: string;
     type?: string;
     file_hash?: string;
     message?: string;
-};
-export type PassportElementErrorTranslationFiles = {
+}
+export interface PassportElementErrorTranslationFiles {
     source?: string;
     type?: string;
     file_hashes?: string[];
     message?: string;
-};
-export type PassportElementErrorUnspecified = {
+}
+export interface PassportElementErrorUnspecified {
     source?: string;
     type?: string;
     element_hash?: string;
     message?: string;
-};
-export type Game = {
+}
+export interface Game {
     title?: string;
     description?: string;
     photo?: PhotoSize[];
     text?: string;
     text_entities?: MessageEntity[];
     animation?: Animation;
-};
-export type CallbackGame = {};
-export type GameHighScore = {
+}
+export interface CallbackGame {}
+export interface GameHighScore {
     position?: number;
     user?: User;
     score?: number;
-};
+}
